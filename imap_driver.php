@@ -15,11 +15,6 @@ class imap_driver
 
     private $full_debug = false;
 
-    public function __construct()
-    {
-
-    }
-
     public function init($host, $port)
     {
         if (!($this->fp = fsockopen($host, $port, $errno, $errstr, 15))) {
@@ -121,16 +116,6 @@ class imap_driver
         }
     }
 
-    public function logout()
-    {
-        $this->command("LOGOUT");
-
-        $this->close();
-
-        return true;
-    }
-
-
     private function command($command)
     {
         $this->last_response = array();
@@ -171,7 +156,7 @@ class imap_driver
         $this->command_counter = sprintf('%08d', intval($this->command_counter) + 1);
     }
 
-    private function close()
+    public function close()
     {
         fclose($this->fp);
     }
