@@ -43,10 +43,10 @@ class imap_driver
         $this->command("LOGIN $login $pwd");
 
         if (preg_match('~^OK~', $this->last_endline)) {
-            $this->error = join(', ', $this->last_response);
 
             return true;
         } else {
+            $this->error = join(', ', $this->last_response);
             $this->close();
 
             return false;
@@ -60,6 +60,7 @@ class imap_driver
         if (preg_match('~^OK~', $this->last_endline)) {
             return true;
         } else {
+            $this->error = join(', ', $this->last_response);
             $this->close();
 
             return false;
@@ -82,6 +83,7 @@ class imap_driver
 
             return $uids;
         } else {
+            $this->error = join(', ', $this->last_response);
             $this->close();
 
             return false;
@@ -110,6 +112,7 @@ class imap_driver
 
             return $headers;
         } else {
+            $this->error = join(', ', $this->last_response);
             $this->close();
 
             return false;
